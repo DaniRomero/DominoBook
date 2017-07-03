@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="fill_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="3dp"
+            android:text="New Game"
+            android:textAlignment="center"
+            android:textColor="#FFF"
+            android:textSize="20sp" />
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:textAlignment="center"
+        android:text="Type player's names"
+        android:textSize="20sp"/>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/player1_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:theme="@style/Theme.AppCompat.Light"
+        app:hintTextAppearance="@android:style/TextAppearance.DeviceDefault.Medium">
+
+        <EditText
+            android:id="@+id/player1_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Player1" />
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/player2_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/Theme.AppCompat.Light"
+        app:hintTextAppearance="@android:style/TextAppearance.DeviceDefault.Medium">
+
+        <EditText
+            android:id="@+id/player2_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Player2" />
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/player3_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/Theme.AppCompat.Light"
+        app:hintTextAppearance="@android:style/TextAppearance.DeviceDefault.Medium">
+
+        <EditText
+            android:id="@+id/player3_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Player3" />
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/player4_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/Theme.AppCompat.Light"
+        app:hintTextAppearance="@android:style/TextAppearance.DeviceDefault.Medium">
+
+        <EditText
+            android:id="@+id/player4_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Player4" />
+    </android.support.design.widget.TextInputLayout>
+
+    <Button
+        android:id="@+id/btn_start_game"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:background="@color/colorPrimary"
+        android:text="Start"
+        android:textColor="@android:color/white" />
+
+</LinearLayout>
