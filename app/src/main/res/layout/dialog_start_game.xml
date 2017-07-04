@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="fill_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
     <LinearLayout
+        android:id="@+id/ll_title"
+        android:layout_alignParentTop="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary">
@@ -22,6 +24,8 @@
     </LinearLayout>
 
     <TextView
+        android:layout_below="@id/ll_title"
+        android:id="@+id/title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -30,11 +34,12 @@
         android:textSize="20sp"/>
 
     <android.support.design.widget.TextInputLayout
+        android:layout_below="@id/title"
         android:id="@+id/player1_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:theme="@style/Theme.AppCompat.Light"
+        android:theme="@style/TextInput"
         app:hintTextAppearance="@android:style/TextAppearance.DeviceDefault.Medium">
 
         <EditText
@@ -45,10 +50,11 @@
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
+        android:layout_below="@id/player1_layout"
         android:id="@+id/player2_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:theme="@style/Theme.AppCompat.Light"
+        android:theme="@style/TextInput"
         app:hintTextAppearance="@android:style/TextAppearance.DeviceDefault.Medium">
 
         <EditText
@@ -59,10 +65,11 @@
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
+        android:layout_below="@id/player2_layout"
         android:id="@+id/player3_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:theme="@style/Theme.AppCompat.Light"
+        android:theme="@style/TextInput"
         app:hintTextAppearance="@android:style/TextAppearance.DeviceDefault.Medium">
 
         <EditText
@@ -73,10 +80,11 @@
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
+        android:layout_below="@id/player3_layout"
         android:id="@+id/player4_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:theme="@style/Theme.AppCompat.Light"
+        android:theme="@style/TextInput"
         app:hintTextAppearance="@android:style/TextAppearance.DeviceDefault.Medium">
 
         <EditText
@@ -86,13 +94,40 @@
             android:hint="Player4" />
     </android.support.design.widget.TextInputLayout>
 
-    <Button
-        android:id="@+id/btn_start_game"
-        android:layout_width="fill_parent"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:background="@color/colorPrimary"
-        android:text="Start"
-        android:textColor="@android:color/white" />
+        android:orientation="horizontal"
+        android:layout_below="@id/player4_layout"
+        android:weightSum="1">
 
-</LinearLayout>
+        <Button
+            android:layout_below="@id/player4_layout"
+            android:id="@+id/btn_cancel_game"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginLeft="15dp"
+            android:background="@drawable/shape"
+            android:text="Cancel"
+            android:textColor="@android:color/white"
+            android:layout_weight="0.5"/>
+
+        <Button
+            android:layout_below="@id/player4_layout"
+            android:id="@+id/btn_start_game"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginLeft="15dp"
+            android:background="@drawable/shape"
+            android:text="Start"
+            android:textColor="@android:color/white"
+            android:layout_weight="0.5"/>
+
+    </LinearLayout>
+
+
+</RelativeLayout>

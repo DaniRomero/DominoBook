@@ -10,10 +10,14 @@ import android.inputmethodservice.KeyboardView;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
+import android.util.TypedValue;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -43,6 +47,8 @@ public class GameActivity extends AppCompatActivity {
     LinearLayout team1;
     LinearLayout team2;
 
+    RelativeLayout activityGameLayout;
+
     Keyboard keyboard;
     KeyboardView keyboardView;
 
@@ -69,6 +75,8 @@ public class GameActivity extends AppCompatActivity {
     int currentScoreBoard;
 
     StringBuilder breakLines;
+
+    boolean initialized;
 
     private void updateTurn() {
         int pos = currentPlayer % players.size();
@@ -182,6 +190,8 @@ public class GameActivity extends AppCompatActivity {
         team1 = (LinearLayout) findViewById(R.id.ll_score1);
         team2 = (LinearLayout) findViewById(R.id.ll_score2);
 
+        activityGameLayout = (RelativeLayout) findViewById(R.id.rl_layout_activity_game);
+
         score1 = (TextView) findViewById(R.id.score_player1);
         score2 = (TextView) findViewById(R.id.score_player2);
 
@@ -209,6 +219,8 @@ public class GameActivity extends AppCompatActivity {
         setListeners();
 
         updateTurn();
+
+        initialized = true;
     }
 
     public class saveGameListener implements View.OnClickListener {
@@ -327,6 +339,7 @@ public class GameActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
+
         intent = getIntent();
         activity = GameActivity.this;
         context = activity.getApplicationContext();

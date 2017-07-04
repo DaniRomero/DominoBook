@@ -12,26 +12,7 @@ public class Games {
     List<Game> games;
 
     public Games(){
-
-    }
-
-    public Games(boolean a){
         games = new ArrayList<>();
-        Game game1 = new Game("daniel",
-                "yudis",
-                100,
-                50);
-        Game game2 = new Game("daniel",
-                "ydis",
-                100,
-                50);
-        Game game3 = new Game("daniel",
-                "yuds",
-                100,
-                50);
-        games.add(game1);
-        games.add(game2);
-        games.add(game3);
     }
 
     public List<Game> getGames() {

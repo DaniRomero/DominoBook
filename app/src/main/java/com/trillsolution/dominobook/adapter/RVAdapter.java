@@ -68,7 +68,7 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.DominoViewHolder> 
     public void updateAdapter(){
         games = preferencesUtil.getGames();
         if (games == null)
-            games = new Games(true);
+            games = new Games();
         this.gameList = games.getGames();
         this.notifyDataSetChanged();
     }

@@ -81,8 +81,10 @@ public class MainActivity extends AppCompatActivity {
         player4 = (EditText) dialog.findViewById(R.id.player4_name);
 
         Button start = (Button) dialog.findViewById(R.id.btn_start_game);
+        Button cancel = (Button) dialog.findViewById(R.id.btn_cancel_game);
 
         start.setOnClickListener(new StartGameOnClickListener());
+        cancel.setOnClickListener(new CancelGameOnClickListener());
 
         return dialog;
     }
@@ -145,6 +147,8 @@ public class MainActivity extends AppCompatActivity {
         public void onClick(View view) {
             dialog.dismiss();
             Intent in = new Intent(activity, GameActivity.class);
+            if (player1.getText().toString().isEmpty() && player2.getText().toString().isEmpty())
+                return;
             Domino domino = new Domino(player1.getText().toString(),
                     player2.getText().toString(),
                     player3.getText().toString(),
@@ -152,6 +156,13 @@ public class MainActivity extends AppCompatActivity {
             String data = gson.toJson(domino);
             in.putExtra("domino", data);
             startActivity(in);
+        }
+    }
+
+    private class CancelGameOnClickListener implements View.OnClickListener {
+        @Override
+        public void onClick(View view) {
+            dialog.dismiss();
         }
     }
 
