@@ -3,4 +3,8 @@
     <string name="action_settings">Settings</string>
 
     <string name="player_turn">Player\'s turn:</string>
+
+    <string name="player_total">Total:</string>
+
+    <string name="player_winner">Winner:</string>
 </resources>

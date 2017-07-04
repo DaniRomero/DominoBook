@@ -45,8 +45,6 @@ public class MainActivity extends AppCompatActivity {
 
     RVAdapter adapter;
 
-    Games games;
-
     Dialog dialog;
 
     EditText player1;
@@ -65,16 +63,7 @@ public class MainActivity extends AppCompatActivity {
         linearLayoutManager = new LinearLayoutManager(context);
         rv.setLayoutManager(linearLayoutManager);
 
-        preferencesUtil = new SharedPreferencesUtil(activity, context);
-
-        games = preferencesUtil.getGames();
-
-        if (games != null)
-            adapter = new RVAdapter(games);
-        else {
-            games = new Games();
-            adapter = new RVAdapter(games);
-        }
+        adapter = new RVAdapter(activity, context);
 
         rv.setAdapter(adapter);
     }
@@ -82,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
     private Dialog startGameDialog() {
         dialog = new Dialog(MainActivity.this);
         dialog.setContentView(R.layout.dialog_start_game);
-        dialog.setTitle("Title..");
+        dialog.setTitle("Begin a domino game...");
         dialog.getWindow().getAttributes().width = RecyclerView.LayoutParams.FILL_PARENT;
         dialog.setCancelable(true);
 
@@ -115,6 +104,18 @@ public class MainActivity extends AppCompatActivity {
                  startGameDialog().show();
             }
         });
+    }
+
+    @Override
+    protected void onStart(){
+        super.onStart();
+        if (adapter != null)
+            adapter.updateAdapter();
+    }
+
+    @Override
+    protected void onResume(){
+        super.onResume();
     }
 
     @Override

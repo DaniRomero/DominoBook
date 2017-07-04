@@ -3,6 +3,7 @@ package com.trillsolution.dominobook.preferences;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.support.v7.app.AppCompatActivity;
 
 import com.google.gson.Gson;
 import com.trillsolution.dominobook.model.Game;
@@ -11,7 +12,7 @@ import com.trillsolution.dominobook.model.Games;
 import java.util.List;
 
 
-public class SharedPreferencesUtil {
+public class SharedPreferencesUtil extends AppCompatActivity {
 
     Activity activity;
     Context context;
@@ -25,9 +26,9 @@ public class SharedPreferencesUtil {
     }
 
     public void saveGames(String games){
-        sharedPreferences = activity.getPreferences(Context.MODE_PRIVATE);
+        sharedPreferences = context.getSharedPreferences("DominoBookData", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString("game", games);
+        editor.putString("games", games);
         editor.commit();
     }
 
@@ -36,8 +37,9 @@ public class SharedPreferencesUtil {
         return gson.fromJson(games, Games.class);
     }
 
-    public String getData(){
-        sharedPreferences = activity.getPreferences(Context.MODE_PRIVATE);
-        return sharedPreferences.getString("game", "");
+    private String getData(){
+        sharedPreferences = context.getSharedPreferences("DominoBookData", Context.MODE_PRIVATE);
+        String data = sharedPreferences.getString("games", null);
+        return data;
     }
 }

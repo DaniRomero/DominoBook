@@ -12,6 +12,10 @@ public class Games {
     List<Game> games;
 
     public Games(){
+
+    }
+
+    public Games(boolean a){
         games = new ArrayList<>();
         Game game1 = new Game("daniel",
                 "yudis",
