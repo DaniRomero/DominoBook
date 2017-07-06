@@ -1,7 +1,9 @@
 package com.trillsolution.dominobook.adapter;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -24,10 +26,20 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.DominoViewHolder> 
 
     private List<Game> gameList;
     SharedPreferencesUtil preferencesUtil;
+    Context context;
+    Activity activity;
     Gson gson;
     Games games;
 
+    TextView winnerTeam;
+    TextView looserTeam;
+    TextView winnerScores;
+    TextView looserScores;
+
+
     public RVAdapter(Activity activity, Context context) {
+        this.context = context;
+        this.activity = activity;
         gson = new Gson();
         preferencesUtil = new SharedPreferencesUtil(activity, context);
         games = preferencesUtil.getGames();
@@ -53,6 +65,7 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.DominoViewHolder> 
         dominoViewHolder.winner.setText(gameList.get(position).getWinner());
         dominoViewHolder.looser.setText(gameList.get(position).getLooser());
         dominoViewHolder.btnDelete.setOnClickListener(new deleteOnClickListener(position));
+        dominoViewHolder.cardView.setOnClickListener(new OnCardViewClickListener(position));
     }
 
     @Override
@@ -84,12 +97,12 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.DominoViewHolder> 
 
         public DominoViewHolder(View itemView) {
             super(itemView);
-            this.cardView = (CardView) itemView.findViewById(R.id.cv);
-            this.winner = (TextView) itemView.findViewById(R.id.winner);
-            this.looser = (TextView) itemView.findViewById(R.id.looser);
-            this.winner_score = (TextView) itemView.findViewById(R.id.winner_score);
-            this.looser_score = (TextView) itemView.findViewById(R.id.looser_score);
-            this.btnDelete = (Button) itemView.findViewById(R.id.btn_delete);
+            cardView = (CardView) itemView.findViewById(R.id.cv);
+            winner = (TextView) itemView.findViewById(R.id.winner);
+            looser = (TextView) itemView.findViewById(R.id.looser);
+            winner_score = (TextView) itemView.findViewById(R.id.winner_score);
+            looser_score = (TextView) itemView.findViewById(R.id.looser_score);
+            btnDelete = (Button) itemView.findViewById(R.id.btn_delete);
         }
 
     }
@@ -108,6 +121,47 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.DominoViewHolder> 
             games.setGames(gameList);
             preferencesUtil.saveGames(gson.toJson(games));
             updateAdapter();
+        }
+    }
+
+    public class OnCardViewClickListener implements View.OnClickListener {
+
+        int pos;
+
+        OnCardViewClickListener(int pos){
+            this.pos = pos;
+        }
+
+        @Override
+        public void onClick(View view) {
+            Dialog dialog = new Dialog(activity);
+            dialog.setContentView(R.layout.dialog_game_detail);
+            dialog.setTitle("Detail of a domino game...");
+            dialog.getWindow().getAttributes().width = RecyclerView.LayoutParams.FILL_PARENT;
+            dialog.setCancelable(true);
+
+            winnerTeam = (TextView) dialog.findViewById(R.id.tv_winners_names);
+            looserTeam = (TextView) dialog.findViewById(R.id.tv_loosers_names);
+            winnerScores = (TextView) dialog.findViewById(R.id.tv_winners_scores);
+            looserScores = (TextView) dialog.findViewById(R.id.tv_loosers_scores);
+
+            Game currentGame = gameList.get(pos);
+            StringBuilder breakLines = new StringBuilder("\r\n");
+
+            winnerTeam.setText(currentGame.getWinner()
+                                .concat(breakLines.toString())
+                                .concat(currentGame.getWinner_partner()));
+
+            looserTeam.setText(currentGame.getLooser()
+                                .concat(breakLines.toString()
+                                .concat(currentGame.getLooser_partner())));
+
+            winnerScores.setText(currentGame.getWinner_scores());
+
+            looserScores.setText(currentGame.getLooser_scores());
+
+            dialog.show();
+
         }
     }
 

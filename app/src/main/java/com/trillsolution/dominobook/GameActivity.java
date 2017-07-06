@@ -58,6 +58,9 @@ public class GameActivity extends AppCompatActivity {
     TextView player1;
     TextView player2;
 
+    String player3;
+    String player4;
+
     TextView newScore;
     TextView playerTurn;
     TextView playerWinner;
@@ -101,9 +104,13 @@ public class GameActivity extends AppCompatActivity {
                     .concat(player1.getText().toString()));
 
             game.setWinner(player1.getText().toString());
+            game.setWinner_partner(player3);
             game.setLooser(player2.getText().toString());
+            game.setLooser_partner(player4);
             game.setWinner_score(intTotalScore1);
             game.setLooser_score(intTotalScore2);
+            game.setWinner_scores( (score1.getText().toString().isEmpty()) ? "0" : score1.getText().toString());
+            game.setLooser_scores( (score2.getText().toString().isEmpty()) ? "0" : score2.getText().toString());
 
             saveGame.setEnabled(true);
         }
@@ -114,9 +121,13 @@ public class GameActivity extends AppCompatActivity {
                     .concat(player2.getText().toString()));
 
             game.setWinner(player2.getText().toString());
+            game.setWinner_partner(player4);
             game.setLooser(player1.getText().toString());
+            game.setLooser_partner(player3);
             game.setWinner_score(intTotalScore2);
             game.setLooser_score(intTotalScore1);
+            game.setWinner_scores( (score2.getText().toString().isEmpty()) ? "0" : score2.getText().toString());
+            game.setLooser_scores( (score1.getText().toString().isEmpty()) ? "0" : score1.getText().toString());
 
             saveGame.setEnabled(true);
         }
@@ -139,11 +150,15 @@ public class GameActivity extends AppCompatActivity {
         if (domino.getPlayer2() != null && !domino.getPlayer2().isEmpty())
             players.add(domino.getPlayer2());
 
-        if (domino.getPlayer3() != null && !domino.getPlayer3().isEmpty())
+        if (domino.getPlayer3() != null && !domino.getPlayer3().isEmpty()) {
             players.add(domino.getPlayer3());
+            player3 = domino.getPlayer3();
+        }
 
-        if (domino.getPlayer4() != null && !domino.getPlayer4().isEmpty())
+        if (domino.getPlayer4() != null && !domino.getPlayer4().isEmpty()) {
             players.add(domino.getPlayer4());
+            player4 = domino.getPlayer4();
+        }
 
         if (players.size() < 2)
             finish();
@@ -287,11 +302,17 @@ public class GameActivity extends AppCompatActivity {
                 String previousScore = null;
                 if (currentScoreBoard == 1) {
                     previousScore = score1.getText().toString();
-                    score1.setText(previousScore.concat(breakLines.toString()).concat(addScore));
+                    if (previousScore.isEmpty() || previousScore.length() == 0)
+                        score1.setText(previousScore.concat(addScore));
+                    else
+                        score1.setText(previousScore.concat(breakLines.toString()).concat(addScore));
                     intTotalScore1 += Integer.valueOf(addScore);
                 } else if (currentScoreBoard == 2) {
                     previousScore = score2.getText().toString();
-                    score2.setText(previousScore.concat(breakLines.toString()).concat(addScore));
+                    if (previousScore.isEmpty() || previousScore.length() == 0)
+                        score2.setText(previousScore.concat(addScore));
+                    else
+                        score2.setText(previousScore.concat(breakLines.toString()).concat(addScore));
                     intTotalScore2 += Integer.valueOf(addScore);
                 }
                 updateTotal();
